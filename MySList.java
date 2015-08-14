@@ -163,12 +163,14 @@ public class MySList {
         boolean contains = false;
         while (head != null && head.item.equals(item)) {
             contains = true;
+            size--;
             head = head.next;
         }
         MySListNode node = head;
         while (node != null && node.next != null) {
             if (node.next.item.equals(item)) {
                 contains = true;
+                size--;
                 node.next = node.next.next;
             } else {
                 node = node.next;
@@ -222,6 +224,35 @@ public class MySList {
         }
     }
 
+
+    /**
+     * Rotete the list by k step
+     * @param k if k &gt; 0, rotate to right by k step, or rotate to left.
+     */
+    public void rotate(int k) {
+        if (head == null) {
+            return;
+        }
+        k = k % size;
+        if (k < 0) {
+            k = size + k;
+        } else if (k == 0) {
+            return;
+        }
+        MySListNode node1 = head;
+        MySListNode node2 = head;
+        while (k-- > 0) {
+            node2 = node2.next;
+        }
+        while (node2.next != null) {
+            node1 = node1.next;
+            node2 = node2.next;
+        }
+        node2.next = head;
+        head = node1.next;
+        node1.next = null;
+    }
+
     /**
      * 
      *
@@ -241,7 +272,6 @@ public class MySList {
         list.add(1, 2);
         list.add(2, 3);
         list.add(3, 4);
-        list.reverse();
         System.out.println(list);
         System.out.println(list.get(3));
         list.removeAll(4);
