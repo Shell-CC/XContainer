@@ -178,6 +178,54 @@ public class MySList {
     }
 
 
+    /**
+     * Reverse the list
+     */
+    public void reverse() {
+        if (head == null) {
+            return;
+        }
+        MySListNode node = head;
+        while (node.next != null) {
+            MySListNode tmp = node.next.next;
+            node.next.next = head;
+            head = node.next;
+            node.next = tmp;
+        }
+    }
+    /**
+     * Reverse the items between the specific range in the list
+     * @param m the index of the first item of the range
+     * @param n the index of the last item of the ragng
+     * @throws IndexOutOfBoundsException if m,n in [0, size-1]
+     */
+    public void reverse(int m, int n) {
+        int len = n - m;
+        MySListNode prevHead = new MySListNode(null, head);
+        MySListNode prevM = prevHead;
+        try {
+            while (m-- > 0) {
+                prevM = prevM.next;
+            }
+            MySListNode M = prevM.next;
+            MySListNode newM = M;
+            while (len-- > 0) {
+                MySListNode tmp = M.next.next;
+                M.next.next = newM;
+                newM = M.next;
+                M.next = tmp;
+            }
+            prevM.next = newM;
+            head = prevHead.next;
+        } catch (NullPointerException e) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    /**
+     * 
+     *
+     */
     public String toString() {
         StringBuilder builder = new StringBuilder("[ ");
         for (MySListNode node = head; node != null; node = node.next) {
@@ -193,6 +241,7 @@ public class MySList {
         list.add(1, 2);
         list.add(2, 3);
         list.add(3, 4);
+        list.reverse();
         System.out.println(list);
         System.out.println(list.get(3));
         list.removeAll(4);
