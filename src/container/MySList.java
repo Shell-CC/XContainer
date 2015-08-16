@@ -254,6 +254,57 @@ public class MySList {
         node1.next = null;
     }
 
+
+    /**
+     * detect cycle in the list, and return the start node of the cycle if found.
+     * @return the start node of the loop if found; or else, null.
+     */
+    public MySListNode detectCycle() {
+        MySListNode slow = head;
+        MySListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                fast = head;
+                while (fast != slow) {
+                    fast = fast.next;
+                    slow = slow.next;
+                }
+                return slow;
+            }
+        }
+        return null;
+    }
+
+
+    /**
+     * remove cycle in the linked list, if found.
+     * @return true if there is a cycle.
+     */
+    public boolean removeCycle() {
+        MySListNode slow = head;
+        MySListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                fast = head;
+                while (true) {
+                    if (slow.next == fast.next) {
+                        slow.next = null;
+                        break;
+                    } else {
+                        fast = fast.next;
+                        slow = slow.next;
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * 
      *
