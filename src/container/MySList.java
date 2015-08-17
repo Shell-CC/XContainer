@@ -1,5 +1,8 @@
 package container;
 
+import java.util.Set;
+import java.util.HashSet;
+
 /**
  * Single linked list implementation of the List interface.
  * @author Xiaoxi Shawn Guo
@@ -305,7 +308,56 @@ public class MySList {
         return false;
     }
 
+
     /**
+     * remove duplicates in the unsorted linked list, if found.
+     * @return true if there is duplicate.
+     */
+    public boolean removeDuplicates() {
+        if (head == null) {
+            return false;
+        }
+        boolean contains = false;
+        Set set = new HashSet();
+        set.add(head.item);
+        MySListNode n = head;
+        while (n.next != null) {
+            if (set.contains(n.next.item)) {
+                n.next = n.next.next;
+                size--;
+                contains = true;
+            } else {
+                set.add(n.next.item);
+                n = n.next;
+            }
+        }
+        return contains;
+    }
+
+
+    /**
+     * Remove duplicates in sorted linked list.
+     * @return true if there is duplicate.
+     */
+    public boolean removeSortedDuplicates() {
+        if (head == null) {
+            return false;
+        }
+        boolean flag = false;
+        MySListNode n = head;
+        while (n.next != null) {
+            if (n.next.item == n.item) {
+                n.next = n.next.next;
+                flag = true;
+            } else {
+                n = n.next;
+            }
+        }
+        return flag;
+    }
+
+
+     /**
      * 
      *
      */
@@ -320,13 +372,12 @@ public class MySList {
 
     public static void main(String[] args) {
         MySList list = new MySList();
-        list.add(0, 1);
-        list.add(1, 2);
+        list.add(0, 3);
+        list.add(1, 3);
         list.add(2, 3);
-        list.add(3, 4);
+        list.add(3, 3);
         System.out.println(list);
-        System.out.println(list.get(3));
-        list.removeAll(4);
+        System.out.println(list.removeDuplicates());
         System.out.println(list);
     }
 }
