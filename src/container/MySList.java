@@ -357,6 +357,36 @@ public class MySList {
     }
 
 
+    /**
+     * Sort the single linked list using merge sort
+     *
+     */
+    public void mergeSort() {
+        if (head == null || head.next == null) {
+            return;
+        }
+        // split the list into two equal-size list
+        MySList list1 = new MySList();
+        list1.head = head;
+        list1.size = size/2;
+        MySListNode tail1 = item(size/2-1);
+        MySList list2 = new MySList();
+        list2.head = tail1.next;
+        list2.size = size - size/2;
+        tail1.next = null;
+        System.out.println(list1);
+        System.out.println(list2);
+        // sort the sublists
+        list1.mergeSort();
+        list2.mergeSort();
+        // merge the sublists
+        head = mergeTwoSorted(list1.head , list2.head);
+    }
+    private MySListNode mergeTwoSorted(MySListNode head1, MySListNode head2) {
+        return head1;
+    }
+
+
      /**
      * 
      *
@@ -372,12 +402,11 @@ public class MySList {
 
     public static void main(String[] args) {
         MySList list = new MySList();
-        list.add(0, 3);
-        list.add(1, 3);
-        list.add(2, 3);
+        list.add(0, 2);
+        list.add(1, 1);
+        list.add(2, 4);
         list.add(3, 3);
         System.out.println(list);
-        System.out.println(list.removeDuplicates());
         System.out.println(list);
     }
 }
