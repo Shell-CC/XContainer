@@ -1,6 +1,9 @@
+package container;
 
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
 
 public class MyArray {
 
@@ -98,7 +101,7 @@ public class MyArray {
      * Your function should return length = 2, with [1,2,*].
      * It doesn't matter what you leave beyond the new length.
      */
-    public static int removeDuplicates(int arr) {
+    public static int removeDuplicates(int[] arr) {
         if (arr.length < 2) {
             return arr.length;
         }
@@ -117,6 +120,42 @@ public class MyArray {
     }
 
 
+    /**
+     * Sort the array into the ascending numerical order using quick sort.
+     * @param arr the array to be sorted.
+     */
+    public static void quickSort(int[] arr) {
+        quickSort(arr, 0, arr.length - 1);
+    }
+    /**
+     * Sort the specific range of the array into ascending order using quick sort.
+     * @param arr the array to be sorted.
+     * @param fromIndex the beginning index of the specific range, inclusively.
+     * @param toIndex the end index of the specific range, exclusively.
+     */
+    public static void quickSort(int[] arr, int fromIndex, int toIndex) {
+        if (fromIndex < toIndex) {
+            int pivotIndex = partition(arr, fromIndex, toIndex);
+            quickSort(arr, fromIndex, pivotIndex - 1);
+            quickSort(arr, pivotIndex + 1, toIndex);
+        }
+    }
+    private static int partition(int[] arr, int fromIndex, int toIndex) {
+        int pivot = arr[toIndex];
+        int pi = fromIndex;  // pivot index
+        for (int i = fromIndex; i <= toIndex; i++) {
+            // item from lect of pi is always no larger than pivot
+            if (arr[i] <= pivot) {
+                int tmp = arr[pi];
+                arr[pi] = arr[i];
+                arr[i] = tmp;
+                pi++;
+            }
+        }
+        return pi - 1;
+    }
+
+
     public static String toString(int[] arr) {
         String s = "[ ";
         for (int i = 0; i < arr.length; i++) {
@@ -126,18 +165,20 @@ public class MyArray {
     }
 
     public static void main(String[] args) {
-        int[] arr1 = {1, 2, 3, 4, 5, 6, 7};
-        System.out.println("arr1: " + MyArray.toString(arr1));
-        MyArray.reverse(arr1, 3, 2);
+        int[] arr1 = {2, 1, 7, 8, 3, 5, 6, 4};
+        System.out.println("arr1: " + toString(arr1));
+        quickSort(arr1);
+        System.out.println("sorted arr1: " + toString(arr1));
+        MyArray.reverse(arr1);
         System.out.println("After reversing:");
-        System.out.println("arr1: " + MyArray.toString(arr1));
+        System.out.println("arr1: " + toString(arr1));
         MyArray.rotate(arr1, -4);
-        System.out.println("After rotating by 3: ");
-        System.out.println("arr1: " + MyArray.toString(arr1));
+        System.out.println("After rotating by -4: ");
+        System.out.println("arr1: " + toString(arr1));
 
         int[] arr2 = {3, 7, 7, 7, 4, 5, 5, 2, 0, 8, 8, 8, 8, 5};
         System.out.println("Checking duplicate: ");
-        System.out.println(MyArray.toString(arr1) + ": " + containsDuplicate(arr1));
-        System.out.println(MyArray.toString(arr2) + ": " + containsDuplicate(arr2));
+        System.out.println(toString(arr1) + ": " + containsDuplicate(arr1));
+        System.out.println(toString(arr2) + ": " + containsDuplicate(arr2));
     }
 }
