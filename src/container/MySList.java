@@ -443,6 +443,24 @@ public class MySList {
     }
 
 
+    /**
+     * Return the intersection of the two specific lists, if present.
+     * @param list1 the first given single linked list with no cycle.
+     * @param list2 the second given single linked list with no cycle.
+     * @return the begining of the intersection nodes. If not present, return null
+     */
+    public static MySListNode getFirstIntersection(MySList list1, MySList list2) {
+        if (list1.head == null) {
+            return null;
+        }
+        MySListNode tail1 = list1.get(list1.size - 1);
+        tail1.next = list2.head;
+        MySListNode intersection = list1.detectCycle();
+        tail1.next = null;
+        return intersection;
+    }
+
+
 
      /**
      * 
