@@ -184,12 +184,9 @@ public class MySList {
     }
 
 
-    /**
-     * Reverse the list
-     */
-    public void reverse() {
+    private MySListNode reverse(MySListNode head) {
         if (head == null || head.next == null) {
-            return;
+            return head;
         }
         MySListNode prev = null;
         MySListNode curr = head;
@@ -199,14 +196,20 @@ public class MySList {
             prev = curr;
             curr = next;
         }
-        head = prev;
+        return prev;
+    }
+    /**
+     * Reverse the list
+     */
+    public void reverse() {
+        head = reverse(head);
     }
     /**
      * Reverse the items between the specific range in the list
      * @param m the index of the first item of the range
      * @param n the index of the last item of the range
      * @throws IndexOutOfBoundsException if m,n not in [0, size-1]
-     * @thows IllegalArgumentsException if m &gt; n
+     * @throws IllegalArgumentException if m &gt; n
      */
     public void reverse(int m, int n) {
         if (m > n) {
@@ -402,13 +405,12 @@ public class MySList {
 
 
     /**
-     * Check if the list is parlindrome
-     * @return true if it is parlindrome
+     * Check if the list is palindrome
+     * @return true if it is palindrome
      */
-    public boolean isParlindrome() {
-        boolean flag = true;
+    public boolean isPalindrome() {
         if (head == null || head.next == null) {
-            return false;
+            return true;
         }
         // find the beginning node of the latter half
         MySListNode slow = head;
@@ -424,19 +426,19 @@ public class MySList {
             slow = slow.next;  // skip the middle point
         }
         // reverse the latter half
-        // prevSlow.next = reverse(slow);
+        prevSlow.next = reverse(slow);
         // compare the first half and the last half
         slow = head;
         fast = prevSlow.next;
         while (fast != null) {
             if (slow.item != fast.item) {
-                // prevSlow.next = reverse(prevSlow.next);
+                prevSlow.next = reverse(prevSlow.next);
                 return false;
             }
             slow = slow.next;
             fast = fast.next;
         }
-        // prevSlow.next = reverse(prevSlow.next);
+        prevSlow.next = reverse(prevSlow.next);
         return true;
     }
 
@@ -459,10 +461,10 @@ public class MySList {
         MySList list = new MySList();
         list.add(0, 2);
         list.add(1, 1);
-        list.add(2, 4);
-        list.add(3, 3);
+        list.add(2, 1);
+        list.add(3, 2);
         System.out.println(list);
-        list.reverse(5,4);
+        list.reverse();
         System.out.println(list);
     }
 }
