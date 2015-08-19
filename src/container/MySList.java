@@ -47,7 +47,7 @@ public class MySList {
      * @param item item to be added to the list
      * @throws IndexOutOfBoundsException When index &gt;= size || index &lt; 0
      */
-    public void add(int index, Object item) {
+    public void add(int index, int item) {
         if (index < 0) {
             throw new IndexOutOfBoundsException();
         } else if (index == 0) {
@@ -62,7 +62,7 @@ public class MySList {
      * Inserts the item at the begining of the list
      * @param item item to be added to the list
      */
-    public void addFirst(Object item) {
+    public void addFirst(int item) {
         head = new MySListNode(item, head);
         size++;
     }
@@ -70,7 +70,7 @@ public class MySList {
      * Appends the item at the end of the list
      * @param item item to be added to the list
      */
-    public void addLast(Object item) {
+    public void addLast(int item) {
         if (head == null) {
             head = new MySListNode(item);
         } else {
@@ -163,16 +163,16 @@ public class MySList {
      * @param item item to be removed from the list
      * @return true the item is present
      */
-    public boolean removeAll(Object item) {
+    public boolean removeAll(int item) {
         boolean contains = false;
-        while (head != null && head.item.equals(item)) {
+        while (head != null && head.item == item) {
             contains = true;
             size--;
             head = head.next;
         }
         MySListNode node = head;
         while (node != null && node.next != null) {
-            if (node.next.item.equals(item)) {
+            if (node.next.item == item) {
                 contains = true;
                 size--;
                 node.next = node.next.next;
@@ -188,41 +188,55 @@ public class MySList {
      * Reverse the list
      */
     public void reverse() {
-        if (head == null) {
+        if (head == null || head.next == null) {
             return;
         }
-        MySListNode node = head;
-        while (node.next != null) {
-            MySListNode tmp = node.next.next;
-            node.next.next = head;
-            head = node.next;
-            node.next = tmp;
+        MySListNode prev = null;
+        MySListNode curr = head;
+        while (curr != null) {
+            MySListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
         }
+        head = prev;
     }
     /**
      * Reverse the items between the specific range in the list
      * @param m the index of the first item of the range
-     * @param n the index of the last item of the ragng
-     * @throws IndexOutOfBoundsException if m,n in [0, size-1]
+     * @param n the index of the last item of the range
+     * @throws IndexOutOfBoundsException if m,n not in [0, size-1]
+     * @thows IllegalArgumentsException if m &gt; n
      */
     public void reverse(int m, int n) {
-        int len = n - m;
-        MySListNode prevHead = new MySListNode(null, head);
-        MySListNode prevM = prevHead;
+        if (m > n) {
+            throw new IllegalArgumentException();
+        }
         try {
-            while (m-- > 0) {
-                prevM = prevM.next;
+            int count = 0;
+            MySListNode prev = null;
+            MySListNode curr = head;
+            while (count < m) {
+                prev = curr;
+                curr = curr.next;
+                count++;
             }
-            MySListNode M = prevM.next;
-            MySListNode newM = M;
-            while (len-- > 0) {
-                MySListNode tmp = M.next.next;
-                M.next.next = newM;
-                newM = M.next;
-                M.next = tmp;
+            MySListNode M = curr;
+            MySListNode prevM = prev;
+            while (count <= n) {
+                MySListNode next = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = next;
+                count++;
             }
-            prevM.next = newM;
-            head = prevHead.next;
+            if (M == head) {
+                head.next = curr;
+                head = prev;
+            } else {
+                M.next = curr;
+                prevM.next = prev;
+            }
         } catch (NullPointerException e) {
             throw new IndexOutOfBoundsException();
         }
@@ -387,6 +401,47 @@ public class MySList {
     }
 
 
+    /**
+     * Check if the list is parlindrome
+     * @return true if it is parlindrome
+     */
+    public boolean isParlindrome() {
+        boolean flag = true;
+        if (head == null || head.next == null) {
+            return false;
+        }
+        // find the beginning node of the latter half
+        MySListNode slow = head;
+        MySListNode prevSlow = null;
+        MySListNode fast = head;
+        while (fast != null && fast.next != null) {
+            prevSlow = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        if (fast != null) {
+            prevSlow = slow;
+            slow = slow.next;  // skip the middle point
+        }
+        // reverse the latter half
+        // prevSlow.next = reverse(slow);
+        // compare the first half and the last half
+        slow = head;
+        fast = prevSlow.next;
+        while (fast != null) {
+            if (slow.item != fast.item) {
+                // prevSlow.next = reverse(prevSlow.next);
+                return false;
+            }
+            slow = slow.next;
+            fast = fast.next;
+        }
+        // prevSlow.next = reverse(prevSlow.next);
+        return true;
+    }
+
+
+
      /**
      * 
      *
@@ -407,6 +462,7 @@ public class MySList {
         list.add(2, 4);
         list.add(3, 3);
         System.out.println(list);
+        list.reverse(5,4);
         System.out.println(list);
     }
 }

@@ -2,19 +2,19 @@ package container;
 
 public class MySListNode {
 
-    Object item;
+    int item;
     MySListNode next;
 
-    public MySListNode(Object item, MySListNode next) {
+    public MySListNode(int item, MySListNode next) {
         this.item = item;
         this.next = next;
     }
 
-    public MySListNode(Object item) {
+    public MySListNode(int item) {
         this(item, null);
     }
 
     public String toString() {
-        return "Node:" + item.toString() + " ";
+        return "Node:" + item + " ";
     }
 }
