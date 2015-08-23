@@ -41,3 +41,7 @@ public interface Stack<E> extends Iterable<E>{
      */
     public abstract int size();
 }
+
+class EmptyStackException extends RuntimeException {
+    public EmptyStackException() {}
+}

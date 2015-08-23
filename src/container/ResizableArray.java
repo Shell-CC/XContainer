@@ -3,9 +3,9 @@ package container;
 import java.util.Iterator;
 
 @SuppressWarnings(value="unchecked")
-public class ResizableArray<E> implements Stack<E>, Iterable<E> {
-    private E[] arr;
-    private int size;
+public class ResizableArray<E> implements Iterable<E> {
+    protected E[] arr;
+    protected int size;
 
 
     /**
@@ -59,44 +59,14 @@ public class ResizableArray<E> implements Stack<E>, Iterable<E> {
 
 
     /**
-     * Return the elemennt on the top of the stack without moving it
-     * @return the element on top of the stack.
-     */
-    public E peek() {
-        return arr[size-1];
-    }
-
-
-    /**
-     * Remove and return the element from the top of the stack.
-     * @return the element on top of the stack.
-     */
-    public E pop() {
-        return arr[--size];
-    }
-
-
-    /**
-     * Push(add) the specific element onto the top of the stack.
-     * @param element the element to be pushed.
-     */
-    public void push(E element) {
-        if (size == arr.length) {
-            resizing(size*2);
-        }
-        arr[size++] = element;
-    }
-
-
-    /**
      * Returns an iterator over the elements in the resizing array.
-     * @return iterator in descending order.
+     * @return iterator over the elements.
      */
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            private int i = size - 1;
-            public boolean hasNext() {  return i >= 0;  }
-            public E next() {  return arr[i--];  }
+            private int i = 0;
+            public boolean hasNext() {  return i < size;  }
+            public E next() {  return arr[i++];  }
             public void remove() {}
         };
     }
