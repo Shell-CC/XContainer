@@ -16,7 +16,7 @@ class TestStack {
 
 class TestQueue {
     public static void main(String[] args) {
-        Queue<Integer> queue = new LinkedQueue<>();
+        Queue<Integer> queue = new ArrayQueue<>();
         for (String s : args) {
             queue.offer(Integer.valueOf(s));
         }

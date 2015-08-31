@@ -16,6 +16,7 @@ public interface Queue<E> extends Iterable<E> {
     /**
      * Remove and return the element at the begining of the queue.
      * @return the element removed
+     * @throws EmptyQueueException If the queue is empty.
      */
     public abstract E poll();
 
@@ -23,6 +24,7 @@ public interface Queue<E> extends Iterable<E> {
     /**
      * Return the element at the begining of the queue without removing it.
      * @return the element retrived
+     * @throws EmptyQueueException if the queue is empty
      */
     public abstract E peek();
 

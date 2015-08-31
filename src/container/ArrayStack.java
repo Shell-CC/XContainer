@@ -44,7 +44,7 @@ public class ArrayStack<E> extends ResizableArray<E> implements Stack<E>{
         try{
             E item = arr[--size];
             arr[size] = null;    // avoid loitering
-            if (size == arr.length/4) {
+            if (size <= arr.length/4) {
                 resizing(size*2);
             }
             return item;
