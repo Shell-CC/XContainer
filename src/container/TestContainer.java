@@ -27,3 +27,30 @@ class TestQueue {
         System.out.println("peek: " + queue.peek());
     }
 }
+
+class TestMinStack {
+    public static void main(String[] args) {
+        MinStack minStack = new MinStack();
+        minStack.push(512);
+        minStack.push(-1024);
+        minStack.push(-1024);
+        minStack.push(512);
+        minStack.pop();
+        System.out.println(minStack.getMin());
+        minStack.pop();
+        System.out.println(minStack.getMin());
+        minStack.pop();
+        System.out.println(minStack.getMin());
+    }
+}
+
+
+class TestSort {
+    public static void main(String[] args) {
+        Integer[] a = {64, 25, 12, 22, 11};
+        System.out.println(Arrays.toString(a));
+        System.out.println("After sorting:");
+        Arrays.insertionSort(a);
+        System.out.println(Arrays.toString(a));
+    }
+}
