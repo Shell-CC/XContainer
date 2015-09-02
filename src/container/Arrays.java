@@ -1,5 +1,7 @@
 package container;
 
+import java.util.Random;
+
 /**
  * This class contains several methods for manipulating arrays.
  */
@@ -97,6 +99,40 @@ public class Arrays {
                 a[k] = aux[j++];
             }
         }
+    }
+
+
+    private static Random r;
+    /**
+     * Sort the speicific array into ascending order using quick sort.
+     * @param a The array to be sorted.
+     */
+    public static void quickSort(Comparable[] a) {
+        r = new Random();
+        quickSort(a, 0, a.length - 1);
+    }
+    private static void quickSort(Comparable[] a, int fromIndex, int toIndex) {
+        if (toIndex > fromIndex) {
+            int pivotIndex = partition(a, fromIndex, toIndex);
+            quickSort(a, fromIndex, pivotIndex - 1);
+            quickSort(a, pivotIndex + 1, toIndex);
+        }
+    }
+    private static int partition(Comparable[] a, int fromIndex, int toIndex) {
+        // choose the pivot randomly.
+        int rIndex = fromIndex + r.nextInt(toIndex - fromIndex + 1);
+        swap(a, rIndex, toIndex);
+        // partition in place.
+        Comparable pivot = a[toIndex];
+        int p = fromIndex;  // pivot index
+        for (int i = fromIndex; i <= toIndex; i++) {
+            // item from left of the pivot is always no larger than pivot
+            if (a[i].compareTo(pivot) <= 0) {
+                swap(a, p, i);
+                p++;
+            }
+        }
+        return p - 1;
     }
 
 
