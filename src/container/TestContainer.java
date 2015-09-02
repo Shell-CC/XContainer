@@ -50,7 +50,7 @@ class TestSort {
         Integer[] a = {64, 25, 12, 22, 11};
         System.out.println(Arrays.toString(a));
         System.out.println("After sorting:");
-        Arrays.insertionSort(a);
+        Arrays.mergeSort(a);
         System.out.println(Arrays.toString(a));
     }
 }

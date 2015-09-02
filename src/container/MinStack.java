@@ -18,7 +18,7 @@ public class MinStack extends ArrayStack<Integer> implements Stack<Integer> {
 
     /**
      * Push(add) the specific element onto the top of the stack.
-     * @param item The element to be pushed.
+     * @param x The element to be pushed.
      */
     public void push(int x) {
         super.push(x);
