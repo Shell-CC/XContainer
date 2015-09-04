@@ -60,10 +60,27 @@ class TestBinaryTree {
     public static void main(String[] args) {
         BinaryTree<Character> tree = new BinaryTree<>();
         initial(tree);
-        Object[] inorder = tree.inorder();
-        for (Object c : inorder) {
-            System.out.println(c);
+        // preorder
+        Object[] order = tree.preorder();
+        System.out.print("Preorder: ");
+        for (Object c : order) {
+            System.out.print(c + " ");
         }
+        System.out.println();
+        // inorder
+        order = tree.inorder();
+        System.out.print("Inorder: ");
+        for (Object c : order) {
+            System.out.print(c + " ");
+        }
+        System.out.println();
+        // postorder
+        order = tree.postorder();
+        System.out.print("Postorder: ");
+        for (Object c : order) {
+            System.out.print(c + " ");
+        }
+        System.out.println();
     }
     private static void initial(BinaryTree<Character> tree) {
         tree.root = tree.new Node<>('+');
