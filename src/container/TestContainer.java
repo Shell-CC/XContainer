@@ -54,3 +54,42 @@ class TestSort {
         System.out.println(Arrays.toString(a));
     }
 }
+
+
+class TestBinaryTree {
+    public static void main(String[] args) {
+        BinaryTree<Character> tree = new BinaryTree<>();
+        initial(tree);
+        Object[] inorder = tree.inorder();
+        for (Object c : inorder) {
+            System.out.println(c);
+        }
+    }
+    private static void initial(BinaryTree<Character> tree) {
+        tree.root = tree.new Node<>('+');
+        tree.root.left = tree.new Node<>('*');
+        tree.root.right = tree.new Node<>('^');
+        tree.root.left.left = tree.new Node<>('3');
+        tree.root.left.right = tree.new Node<>('7');
+        tree.root.right.left = tree.new Node<>('4');
+        tree.root.right.right = tree.new Node<>('2');
+    }
+}
+
+
+class TestResizableArray {
+    public static void main(String[] args) {
+        ResizableArray<Integer> arr = new ResizableArray<>(2);
+        arr.add(0);
+        arr.add(1);
+        arr.add(2);
+        for (int i : arr) {
+            System.out.println(i);
+        }
+        System.out.println(arr.get(1));
+        Object[] a = arr.toArray();
+        for (Object i : a) {
+            System.out.println(i);
+        }
+    }
+}
