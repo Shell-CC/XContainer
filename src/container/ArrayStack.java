@@ -27,9 +27,10 @@ public class ArrayStack<E> extends ResizableArray<E> implements Stack<E>{
      * Return the elemennt on the top of the stack without moving it
      * @return the element on top of the stack.
      */
+    @SuppressWarnings("unchecked")
     public E peek() {
         try {
-            return arr[size-1];
+            return (E) arr[size-1];
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyStackException();
         }
@@ -40,9 +41,10 @@ public class ArrayStack<E> extends ResizableArray<E> implements Stack<E>{
      * Remove and return the element from the top of the stack.
      * @return the element on top of the stack.
      */
+    @SuppressWarnings("unchecked")
     public E pop() {
         try{
-            E item = arr[--size];
+            E item = (E) arr[--size];
             arr[size] = null;    // avoid loitering
             if (size <= arr.length/4) {
                 resizing(size*2);
@@ -74,7 +76,8 @@ public class ArrayStack<E> extends ResizableArray<E> implements Stack<E>{
         return new Iterator<E>() {
             private int i = size - 1;
             public boolean hasNext() {  return i >= 0;  }
-            public E next() {  return arr[i--];  }
+            @SuppressWarnings("unchecked")
+            public E next() {  return (E) arr[i--];  }
             public void remove() {}
         };
     }

@@ -24,8 +24,8 @@ public class ArrayQueue<E> extends ResizableArray<E> implements Queue<E> {
      * @param item The element to be inserted
      */
     public void offer(E item) {
-        if (arr.length == size) {
-            resizing(2*size);
+        if (rear == arr.length - 1) {
+            resizing(size*2);
         }
         arr[++rear] = item;
         size++;
@@ -37,9 +37,10 @@ public class ArrayQueue<E> extends ResizableArray<E> implements Queue<E> {
      * @return The head of the queue.
      * @throws EmptyQueueException If the queue is empty.
      */
+    @SuppressWarnings("unchecked")
     public E peek() {
         try {
-            return arr[front];
+            return (E) arr[front];
         }
         catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyQueueException();
@@ -51,9 +52,10 @@ public class ArrayQueue<E> extends ResizableArray<E> implements Queue<E> {
      * @return The head of the queue.
      * @throws EmptyQueueException If the queue is Empty.
      */
+    @SuppressWarnings("unchecked")
     public E poll() {
         try {
-            E item = arr[front];
+            E item = (E) arr[front];
             arr[front++] = null;
             size--;
             if (size <= arr.length/4) {
