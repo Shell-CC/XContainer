@@ -3,6 +3,7 @@ package container;
 /**
  * An interface of table that maps keys to values.
  * No duplicate keys are permited.
+ * No null key is allowed.
  */
 public interface Table<K, V> {
 
