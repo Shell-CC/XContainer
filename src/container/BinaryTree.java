@@ -17,10 +17,31 @@ class BinaryTree<E> {
      * Preorder Traverse the binary tree.
      * @return Array of all the elements in preorder.
      */
-    public Object[] preorder() {
-        ResizableArray<E> arr = new ResizableArray<>(size());
+    public E[] preorder() {
+        return preorderIterative();
+    }
+    private Object[] preorderRecursive() {
+        ResizableArray<E> arr = new ResizableArray<>();
         root.preorder(arr);
         return arr.toArray();
+    }
+    private E[] preorderIterative() {
+        @SuppressWarnings("unchecked")
+        E[] order = (E[]) new Object[size()];
+        Stack<Node<E>> stack = new ArrayStack<>();
+        stack.push(root);
+        int i = 0;
+        while (!stack.isEmpty()) {
+            Node<E> n = stack.pop();
+            order[i++] = n.data;
+            if (n.right != null) {
+                stack.push(n.right);
+            }
+            if (n.left != null) {
+                stack.push(n.left);
+            }
+        }
+        return order;
     }
 
 
@@ -28,10 +49,34 @@ class BinaryTree<E> {
      * Inorder Traverse the binary tree.
      * @return Array of all the elements in inorder.
      */
-    public Object[] inorder() {
-        ResizableArray<E> arr = new ResizableArray<>(size());
+    public E[] inorder() {
+        return inorderIterative();
+    }
+    private Object[] inorderRecursive() {
+        ResizableArray<E> arr = new ResizableArray<>();
         root.inorder(arr);
         return arr.toArray();
+    }
+    private E[] inorderIterative() {
+        @SuppressWarnings("unchecked")
+        E[] inorder = (E[]) new Object[size()];
+        Stack<Node<E>> stack = new ArrayStack<>();
+        Node<E> curr = root;   // node of traversal
+        int i = 0;
+        while (curr != null || !stack.isEmpty()) {
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            while (curr == null && !stack.isEmpty()) {
+                Node<E> n = stack.pop();    // node to be added.
+                inorder[i++] = n.data;
+                if (n.right != null) {
+                    curr = n.right;
+                }
+            }
+        }
+        return inorder;
     }
 
 
@@ -39,11 +84,33 @@ class BinaryTree<E> {
      * Postorder Traverse the binary tree.
      * @return Array of all the elements in postorder.
      */
-    public Object[] postorder() {
-        ResizableArray<E> arr = new ResizableArray<>(size());
+    public E[] postorder() {
+        return postorderIterative();
+    }
+    private Object[] postorderRecursive() {
+        ResizableArray<E> arr = new ResizableArray<>();
         root.postorder(arr);
         return arr.toArray();
     }
+    private E[] postorderIterative() {
+        @SuppressWarnings("unchecked")
+        E[] postorder = (E[]) new Object[size()];
+        Stack<Node<E>> stack = new ArrayStack<>();
+        stack.push(root);
+        int i = postorder.length - 1;
+        while (!stack.isEmpty()) {
+            Node<E> n = stack.pop();
+            postorder[i--] = n.data;
+            if (n.left != null) {
+                stack.push(n.left);
+            }
+            if (n.right != null) {
+                stack.push(n.right);
+            }
+        }
+        return postorder;
+    }
+
 
 
     /**
