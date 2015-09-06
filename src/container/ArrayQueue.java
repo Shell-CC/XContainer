@@ -58,7 +58,7 @@ public class ArrayQueue<E> extends ResizableArray<E> implements Queue<E> {
             E item = (E) arr[front];
             arr[front++] = null;
             size--;
-            if (size <= arr.length/4) {
+            if (size <= arr.length/4 && size > 10) {
                 resizing(size*2);
             }
             return item;

@@ -17,7 +17,7 @@ class BinaryTree<E> {
      * Preorder Traverse the binary tree.
      * @return Array of all the elements in preorder.
      */
-    public E[] preorder() {
+    public Object[] preorder() {
         return preorderIterative();
     }
     private Object[] preorderRecursive() {
@@ -25,7 +25,7 @@ class BinaryTree<E> {
         root.preorder(arr);
         return arr.toArray();
     }
-    private E[] preorderIterative() {
+    private Object[] preorderIterative() {
         @SuppressWarnings("unchecked")
         E[] order = (E[]) new Object[size()];
         Stack<Node<E>> stack = new ArrayStack<>();
@@ -49,7 +49,7 @@ class BinaryTree<E> {
      * Inorder Traverse the binary tree.
      * @return Array of all the elements in inorder.
      */
-    public E[] inorder() {
+    public Object[] inorder() {
         return inorderIterative();
     }
     private Object[] inorderRecursive() {
@@ -57,7 +57,7 @@ class BinaryTree<E> {
         root.inorder(arr);
         return arr.toArray();
     }
-    private E[] inorderIterative() {
+    private Object[] inorderIterative() {
         @SuppressWarnings("unchecked")
         E[] inorder = (E[]) new Object[size()];
         Stack<Node<E>> stack = new ArrayStack<>();
@@ -84,7 +84,7 @@ class BinaryTree<E> {
      * Postorder Traverse the binary tree.
      * @return Array of all the elements in postorder.
      */
-    public E[] postorder() {
+    public Object[] postorder() {
         return postorderIterative();
     }
     private Object[] postorderRecursive() {
@@ -92,7 +92,7 @@ class BinaryTree<E> {
         root.postorder(arr);
         return arr.toArray();
     }
-    private E[] postorderIterative() {
+    private Object[] postorderIterative() {
         @SuppressWarnings("unchecked")
         E[] postorder = (E[]) new Object[size()];
         Stack<Node<E>> stack = new ArrayStack<>();
@@ -109,6 +109,68 @@ class BinaryTree<E> {
             }
         }
         return postorder;
+    }
+
+
+    /**
+     * Level-order (BFS) Traverse the binary tree.
+     * @return An Array of all the elements in level order.
+     */
+    public Object[] levelorder() {
+        return levelorderIterative();
+    }
+    private Object[] levelorderIterative() {
+        @SuppressWarnings("unchecked")
+        E[] levelorder = (E[]) new Object[size()];
+        Queue<Node<E>> queue = new ArrayQueue<>();
+        queue.offer(root);
+        int i = 0;
+        while (!queue.isEmpty()) {
+            Node<E> n = queue.poll();
+            levelorder[i++] = n.data;
+            if (n.left != null) {
+                queue.offer(n.left);
+            }
+            if (n.right != null) {
+                queue.offer(n.right);
+            }
+        }
+        return levelorder;
+    }
+    private Object[] levelorderRecursive() {
+        ResizableArray<E> arr = new ResizableArray<>(size());
+        int level = 1;
+        while (arr.size() < size()) {
+            getLevel(root, level, arr);
+            level++;
+        }
+        return arr.toArray();
+    }
+
+
+    /**
+     * Return all the elements in the specific level.
+     * @param level The specific level to be traversed.
+     * @return An array of elements in the specific level.
+     * @throws IllegalArgumentException If level &lt;= 0.
+     */
+    public Object[] getLevel(int level) {
+        ResizableArray<E> arr = new ResizableArray<>();
+        getLevel(root, level, arr);
+        return arr.toArray();
+    }
+    private void getLevel(Node<E> root, int level, ResizableArray<E> arr) {
+        if (root == null) {
+            return;
+        }
+        if (level == 1) {
+            arr.add(root.data);
+        } else if (level > 1){
+            getLevel(root.left, level - 1, arr);
+            getLevel(root.right, level - 1, arr);
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
 

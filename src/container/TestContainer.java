@@ -81,6 +81,13 @@ class TestBinaryTree {
             System.out.print(c + " ");
         }
         System.out.println();
+        // level order
+        order = tree.levelorder();
+        System.out.print("Level order: ");
+        for (Object c : order) {
+            System.out.print(c + " ");
+        }
+        System.out.println();
     }
     private static void initial(BinaryTree<Character> tree) {
         tree.root = tree.new Node<>('+');
