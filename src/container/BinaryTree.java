@@ -1,6 +1,6 @@
 package container;
 
-class BinaryTree<E> {
+public class BinaryTree<E> {
 
     Node<E> root;
 
@@ -171,6 +171,21 @@ class BinaryTree<E> {
         } else {
             throw new IllegalArgumentException();
         }
+    }
+
+
+    /**
+     * Compare this binary tree to another.
+     * @param another The other tree to compare to.
+     * @return True if two trees are identical.
+     */
+    public boolean equals(BinaryTree<E> another) {
+        return equals(this.root, another.root);
+    }
+    private boolean equals(Node<E> root1, Node<E> root2) {
+        if (root1 == null && root2 == null) { return true; }
+        return root1 != null && root2 != null && root1.data == root2.data
+            && equals(root1.left, root2.left) && equals(root1.right, root2.right);
     }
 
 
