@@ -1,5 +1,7 @@
 package container;
 
+import java.util.Iterator;
+
 public class BinaryTree<E> {
 
     Node<E> root;
@@ -68,12 +70,10 @@ public class BinaryTree<E> {
                 stack.push(curr);
                 curr = curr.left;
             }
-            while (curr == null && !stack.isEmpty()) {
-                Node<E> n = stack.pop();    // node to be added.
-                inorder[i++] = n.data;
-                if (n.right != null) {
-                    curr = n.right;
-                }
+            Node<E> n = stack.pop();    // node to be added.
+            inorder[i++] = n.data;
+            if (n.right != null) {
+                curr = n.right;
             }
         }
         return inorder;
@@ -203,6 +203,33 @@ public class BinaryTree<E> {
             root.right = toMirror(left);
         }
         return root;
+    }
+
+
+    /**
+     * Return an inorder iterator of the binary tree.
+     * @return Iterator of the binary tree in inorder.
+     */
+    public Iterator<E> inorderIterator() {
+        return new Iterator<E>() {
+            private Node<E> curr = root;
+            private Stack<Node<E>> stack = new ArrayStack<>();
+            public boolean hasNext() {
+                return curr != null || !stack.isEmpty();
+            }
+            public E next() {
+                while (curr != null) {
+                    stack.push(curr);
+                    curr = curr.left;
+                }
+                Node<E> n = stack.pop();
+                if (n.right != null) {
+                    curr = n.right;
+                }
+                return n.data;
+            }
+            public void remove(){}
+        };
     }
 
 

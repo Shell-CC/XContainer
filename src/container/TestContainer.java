@@ -1,5 +1,7 @@
 package container;
 
+import java.util.Iterator;
+
 class TestStack {
     public static void main(String[] args) {
         Stack<Integer> stack = new LinkedStack<>();
@@ -86,6 +88,12 @@ class TestBinaryTree {
         System.out.print("Level order: ");
         for (Object c : order) {
             System.out.print(c + " ");
+        }
+        System.out.println();
+        // test Iterator
+        System.out.print("Inorder iterator: ");
+        for (Iterator<Character> it = tree.inorderIterator(); it.hasNext();) {
+            System.out.print(it.next() + " ");
         }
         System.out.println();
         // test mirror
