@@ -88,6 +88,14 @@ class TestBinaryTree {
             System.out.print(c + " ");
         }
         System.out.println();
+        // test mirror
+        tree.toMirror();
+        order = tree.levelorder();
+        System.out.print("Level order after mirror: ");
+        for (Object c : order) {
+            System.out.print(c + " ");
+        }
+        System.out.println();
     }
     private static void initial(BinaryTree<Character> tree) {
         tree.root = tree.new Node<>('+');

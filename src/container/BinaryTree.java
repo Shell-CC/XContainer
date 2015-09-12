@@ -189,6 +189,22 @@ public class BinaryTree<E> {
     }
 
 
+    /**
+     * Invert the binary tree to its mirror.
+     */
+    public void toMirror() {
+        toMirror(root);
+    }
+    private Node<E> toMirror(Node<E> root) {
+        if (root != null) {
+            Node<E> left = root.left;
+            Node<E> right = root.right;
+            root.left = toMirror(right);
+            root.right = toMirror(left);
+        }
+        return root;
+    }
+
 
     /**
      * Binary Tree Node.
