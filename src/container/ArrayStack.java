@@ -2,8 +2,7 @@ package container;
 
 import java.util.Iterator;
 /**
- * Implement a stack using resizing array
- *
+ * A resizing array implementation of Stack interface.
  */
 public class ArrayStack<E> extends ResizableArray<E> implements Stack<E>{
 

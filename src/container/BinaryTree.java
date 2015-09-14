@@ -2,6 +2,10 @@ package container;
 
 import java.util.Iterator;
 
+/**
+ * General binary tree.
+ */
+
 public class BinaryTree<E> {
 
     Node<E> root;

@@ -1,5 +1,8 @@
 package container;
 
+/**
+ * Linked list implementation of Queue interface.
+ */
 public class LinkedQueue<E> extends AbstractLinkedList<E> implements Queue<E>{
     private LinkedNode tail;
 

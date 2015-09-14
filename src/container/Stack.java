@@ -1,8 +1,7 @@
 package container;
 
 /**
- * Implements of LIFO stack.
- *
+ * Interface of LIFO stack.
  */
 public interface Stack<E> extends Iterable<E>{
 

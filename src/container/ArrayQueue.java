@@ -2,7 +2,6 @@ package container;
 
 /**
  * Resizable array implementation of Queue interface.
- *
  */
 
 public class ArrayQueue<E> extends ResizableArray<E> implements Queue<E> {

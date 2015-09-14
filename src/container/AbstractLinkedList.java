@@ -2,6 +2,9 @@ package container;
 
 import java.util.Iterator;
 
+/**
+ * A sinlge linked list.
+ */
 public abstract class AbstractLinkedList<E> implements Iterable<E>{
     protected LinkedNode<E> head;
     protected int size;

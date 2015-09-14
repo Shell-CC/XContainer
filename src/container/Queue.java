@@ -1,8 +1,7 @@
 package container;
 
 /**
- * Implements of FIFO queue.
- *
+ * Interface of FIFO queue.
  */
 public interface Queue<E> extends Iterable<E> {
 

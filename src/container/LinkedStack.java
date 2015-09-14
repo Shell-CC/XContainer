@@ -1,5 +1,8 @@
 package container;
 
+/**
+ * Linked list implementation of Stack interface.
+ */
 public class LinkedStack<E> extends AbstractLinkedList<E> implements Stack<E> {
 
     /**
