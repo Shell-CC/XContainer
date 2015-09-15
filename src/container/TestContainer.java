@@ -104,6 +104,24 @@ class TestBinaryTree {
             System.out.print(c + " ");
         }
         System.out.println();
+        // test build tree
+        Object[] preorder = {1, 2, 3};
+        Object[] inorder = {2, 1, 3};
+        Object[] postorder = {2, 3, 1};
+        BinaryTree<Integer> tree2= new BinaryTree<>();
+        tree2.buildFromPreAndIn(preorder, inorder);
+        System.out.print("Inorder after building: ");
+        for (Iterator<Integer> it = tree2.inorderIterator(); it.hasNext();) {
+            System.out.print(it.next() + " ");
+        }
+        System.out.println();
+        BinaryTree<Integer> tree3= new BinaryTree<>();
+        tree3.buildFromPostAndIn(postorder, inorder);
+        System.out.print("Inorder after building: ");
+        for (Iterator<Integer> it = tree3.inorderIterator(); it.hasNext();) {
+            System.out.print(it.next() + " ");
+        }
+        System.out.println();
     }
     private static void initial(BinaryTree<Character> tree) {
         tree.root = tree.new Node<>('+');

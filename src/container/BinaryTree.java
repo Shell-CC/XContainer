@@ -19,6 +19,8 @@ public class BinaryTree<E> {
         return root.size();
     }
 
+
+
     /**
      * Preorder Traverse the binary tree.
      * @return Array of all the elements in preorder.
@@ -234,6 +236,67 @@ public class BinaryTree<E> {
             }
             public void remove(){}
         };
+    }
+
+
+    private static int preIndex;
+    private static int postIndex;
+    private int search(Object[] a, int fromIndex, int toIndex, E data) {
+        for (int i = fromIndex; i <= toIndex; i++) {
+            if (a[i] == data) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    /**
+     * Build a binary tree given preorder traversal and inorder traversal.
+     * @param preorder All elements in preorder.
+     * @param inorder All elements in inorder.
+     */
+    public void buildFromPreAndIn(Object[] preorder, Object[] inorder) {
+        preIndex = 0;
+        root = buildFromPreAndIn(preorder, inorder, 0, inorder.length-1);
+    }
+    private Node<E> buildFromPreAndIn(Object[] preorder, Object[] inorder, int inFromIndex, int inToIndex) {
+        if (inFromIndex > inToIndex) {
+            return null;
+        }
+        @SuppressWarnings("unchecked")
+        E data = (E) preorder[preIndex++];
+        Node<E> root = new Node<E>(data);
+        if (inFromIndex == inToIndex) {
+            return root;
+        }
+        int inMidIndex = search(inorder, inFromIndex, inToIndex, data);
+        root.left = buildFromPreAndIn(preorder, inorder, inFromIndex, inMidIndex-1);
+        root.right = buildFromPreAndIn(preorder, inorder, inMidIndex+1, inToIndex);
+        return root;
+    }
+
+    /**
+     * Build a binary tree given postorder and inorder
+     * @param postorder All elements in postorder.
+     * @param inorder All elements in inorder.
+     */
+    public void buildFromPostAndIn(Object[] postorder, Object[] inorder) {
+        postIndex = postorder.length - 1;
+        root = buildFromPostAndIn(postorder, inorder, 0, inorder.length-1);
+    }
+    private Node<E> buildFromPostAndIn(Object[] postorder, Object[] inorder, int inFromIndex, int inToIndex) {
+        if (inFromIndex > inToIndex) {
+            return null;
+        }
+        @SuppressWarnings("unchecked")
+        E data = (E) postorder[postIndex--];
+        Node<E> root = new Node<E>(data);
+        if (inFromIndex == inToIndex) {
+            return root;
+        }
+        int inMidIndex = search(inorder, inFromIndex, inToIndex, data);
+        root.right = buildFromPostAndIn(postorder, inorder, inMidIndex+1, inToIndex);
+        root.left = buildFromPostAndIn(postorder, inorder, inFromIndex, inMidIndex-1);
+        return root;
     }
 
 
