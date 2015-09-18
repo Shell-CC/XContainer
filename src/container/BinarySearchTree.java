@@ -73,4 +73,22 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
     }
 
 
+    /**
+     * Build a balanced BST from a sorted array.
+     * @param sorted The given sorted array in ascending order.
+     */
+    public void build(Comparable[] sorted) {
+        root = build(sorted, 0, sorted.length - 1);
+    }
+    private Node<E> build(Comparable[] sorted, int fromIndex, int toIndex) {
+        if (fromIndex > toIndex) {
+            return null;
+        }
+        int midIndex = fromIndex + (toIndex - fromIndex)/2;
+        @SuppressWarnings("unchecked")
+        Node<E> root = new Node<>((E) sorted[midIndex]);
+        root.left = build(sorted, fromIndex, midIndex-1);
+        root.right = build(sorted, midIndex+1, toIndex);
+        return root;
+    }
 }

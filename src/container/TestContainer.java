@@ -144,6 +144,10 @@ class TestBinarySearchTree {
         System.out.println();
         int i = 2;
         System.out.println(i +"th element is " + bst.get(i));
+        Integer[] sorted = {20, 30, 40, 60, 70, 80};
+        BinarySearchTree<Integer> bst2 = new BinarySearchTree<>();
+        bst2.build(sorted);
+        System.out.println("BST1 equals BST2? " + bst.equals(bst2));
     }
 }
 
