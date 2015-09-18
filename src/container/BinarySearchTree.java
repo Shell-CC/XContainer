@@ -1,9 +1,11 @@
 package container;
 
+import java.util.Iterator;
+
 /**
  * General Binary Search Tree implemetation.
  */
-public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
+public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> implements Iterable<E> {
 
     /**
      * Search a specific element in the BST.
@@ -27,16 +29,26 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
      * @param item The element to insert.
      */
     public void insert(E item) {
-        insert(this.root, item);
+        root = insert(root, item);
     }
-    private void insert(Node<E> root, E item) {
+    private Node<E> insert(Node<E> root, E item) {
         if (root == null) {
-            root = new Node<E>(item);
+            return new Node<>(item);
         }
         if (item.compareTo(root.data) < 0) {
-            insert(root.left, item);
+            root.left = insert(root.left, item);
         } else {
-            insert(root.right, item);
+            root.right = insert(root.right, item);
         }
+        return root;
+    }
+
+
+    /**
+     * Return an iterator of all elements in ascendant order.
+     * @return An ascendant order.
+     */
+    public Iterator<E> iterator() {
+        return inorderIterator();
     }
 }
