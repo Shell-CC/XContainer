@@ -28,8 +28,9 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
      * Insert a specific element into the BST.
      * @param item The element to insert.
      */
-    public void insert(E item) {
-        root = insert(root, item);
+    public BinarySearchTree<E> insert(E item) {
+        this.root = insert(this.root, item);
+        return this;
     }
     private Node<E> insert(Node<E> root, E item) {
         if (root == null) {
@@ -51,4 +52,25 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
     public Iterator<E> iterator() {
         return inorderIterator();
     }
+
+
+    /**
+     * Get kth smallest element in the BST. k should be 0 &lt;= k &lt; bst.size()
+     * @return kth smallest element.
+     * @throw IllegalArgumentsException
+     */
+    public E get(int k) {
+        if (k < 0) {
+            throw new IllegalArgumentException("k should be no smaller than 0");
+        }
+        for (Iterator<E> it = iterator(); it.hasNext(); ) {
+            E item = it.next();
+            if (k-- == 0) {
+                return item;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+
+
 }
