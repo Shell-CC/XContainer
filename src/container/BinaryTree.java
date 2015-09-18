@@ -299,15 +299,23 @@ public class BinaryTree<E> {
         return root;
     }
 
+    /****
+     * Build a binary tree from levelorder and inorder.
+     * @param levelorder All elements in level order.
+     * @param inorder All elements in inorder.
+     */
+    public void buildFromLevelAndIn(Object[] levelorder, Object[] inorder) {
+    }
+
 
     /**
      * Binary Tree Node.
      * No null data is allowed.
      */
     class Node<E> {
-        private E data;
-        public Node<E> left;
-        public Node<E> right;
+        protected E data;
+        Node<E> left;
+        Node<E> right;
 
         public Node(E data) {
             this.data = data;
