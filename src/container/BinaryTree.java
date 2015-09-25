@@ -20,6 +20,32 @@ public class BinaryTree<E> {
     }
 
 
+    /**
+     * Check if the binary tree is balanced.
+     * @return true if it s balenced.
+     */
+    public boolean isBalanced() {
+        return isBalanced(this.root) < 0 ? false : true;
+    }
+    private int isBalanced(Node<E> root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftHeight = isBalanced(root.left);
+        if (leftHeight < 0) {
+            return -1;
+        }
+        int rightHeight = isBalanced(root.right);
+        if (rightHeight < 0) {
+            return -1;
+        }
+        int diffHeight = leftHeight - rightHeight;
+        if (diffHeight > 1 || diffHeight < -1) {
+            return -1;
+        }
+        return leftHeight > rightHeight ? leftHeight + 1 : rightHeight + 1;
+    }
+
 
     /**
      * Preorder Traverse the binary tree.
