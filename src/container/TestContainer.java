@@ -167,3 +167,14 @@ class TestResizableArray {
         }
     }
 }
+
+
+class TestBinaryHeap {
+    public static void main(String[] args) {
+        BinaryHeap<Integer> heap = new BinaryHeap<>(2);
+        heap.insert(4);
+        System.out.println(heap.extractMin());
+        heap.insert(5).insert(3);
+        System.out.println(heap.getMin());
+    }
+}
