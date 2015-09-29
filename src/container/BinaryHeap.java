@@ -9,6 +9,7 @@ public class BinaryHeap<E extends Comparable<E>> {
 
     /**
      * Creates a binary heap.
+     * @param capacity The initial capacity of the heap.
      */
     @SuppressWarnings(value="unchecked")
     public BinaryHeap(int capacity) {
