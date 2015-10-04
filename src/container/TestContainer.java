@@ -178,3 +178,13 @@ class TestBinaryHeap {
         System.out.println(heap.getMin());
     }
 }
+
+class TestStrings {
+    public static void main(String[] args) {
+        String[] strs = new String[]{"4PGC938", "2IYE230", "3CI0720", "2RLA929"};
+        Strings.LsdSort(strs, 7);
+        for (String s : strs) {
+            System.out.println(s);
+        }
+    }
+}
