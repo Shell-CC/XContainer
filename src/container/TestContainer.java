@@ -182,9 +182,29 @@ class TestBinaryHeap {
 class TestStrings {
     public static void main(String[] args) {
         String[] strs = new String[]{"4PGC938", "2IYE230", "3CI0720", "2RLA929"};
-        Strings.LsdSort(strs, 7);
+        Strings.lsdSort(strs, 7);
         for (String s : strs) {
             System.out.println(s);
         }
+        strs = new String[]{"she", "shell", "seashells", "by", "the", "sea", "shells", "are", "sure", "seashell"};
+        Strings.msdSort(strs);
+        for (String s : strs) {
+            System.out.println(s);
+        }
+    }
+}
+
+class TestTable {
+    public static void main(String[] args) {
+        String[] strs = new String[]{"she", "shell", "seashells", "by", "the", "sea", "shells", "are", "sure", "seashell"};
+        Trie<Integer> trie = new Trie<>();
+        for (int i = 0, N = strs.length; i < N; i++) {
+            trie.put(strs[i], i);
+        }
+        System.out.println("Size: " + trie.size());
+        System.out.println("Get she: " + trie.get("she"));
+        System.out.println("Get shells: " + trie.get("shells"));
+        System.out.println("Get shel: " + trie.get("shel"));
+        System.out.println("Contains by: " + trie.contains("by"));
     }
 }

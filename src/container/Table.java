@@ -12,9 +12,8 @@ public interface Table<K, V> {
      * If the key is already existed, replace it with new value.
      * @param key The key with with the specific value is associated.
      * @param value The speicific value associated with the key.
-     * @return The previous value assicated with the key if existed, or else null.
      */
-    abstract public V put(K key, V value);
+    abstract public void put(K key, V value);
 
 
     /**
