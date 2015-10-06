@@ -75,7 +75,31 @@ public class Trie<V> implements Table<String, V>{
      * @return The value to which the specific value is mapped, null if key not found.
      */
     public V remove(String key) {
-        return get(key);
+        if (root == null) return null;
+        Stack<Node> stack = new ArrayStack<>();
+        // Search the key, if not in the trie, not modified
+        Node n = root;
+        for (int i = 0, N = key.length(); i < N; i++) {
+            n = n.next[key.charAt(i)];
+            if (n == null) {
+                return null;
+            } else {
+                stack.push(n);
+            }
+        }
+        // if found, unmark it.
+        V val = (V) n.value;
+        n.value = null;
+        // delete the node until it is no longer prefix of others
+        while (!stack.isEmpty()) {
+            n = stack.pop();
+            if (n.hasNoChildren() &&  n.value == null) {
+                n = null;
+            } else {
+                return val;
+            }
+        }
+        return val;
     }
 
 
@@ -112,5 +136,11 @@ public class Trie<V> implements Table<String, V>{
         // public Node() {
             // next = new Node[R];
         // }
+        private boolean hasNoChildren() {
+            for (Node i : next) {
+                if (i != null) return false;
+            }
+            return true;
+        }
     }
 }

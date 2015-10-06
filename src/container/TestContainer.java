@@ -205,6 +205,11 @@ class TestTable {
         System.out.println("Get she: " + trie.get("she"));
         System.out.println("Get shells: " + trie.get("shells"));
         System.out.println("Get shel: " + trie.get("shel"));
-        System.out.println("Contains by: " + trie.contains("by"));
+        System.out.println("Contains shell: " + trie.contains("shell"));
+        System.out.println("Remove shell.");
+        trie.remove("shell");
+        System.out.println("Size: " + trie.size());
+        System.out.println("Contains shells: " + trie.contains("shells"));
+        System.out.println("Contains shell: " + trie.contains("shell"));
     }
 }

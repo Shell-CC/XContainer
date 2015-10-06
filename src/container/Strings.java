@@ -38,7 +38,7 @@ public class Strings {
     private static int R;
     /**
      * Sort an array of strings using MSD sorting.
-     *
+     * @param strs The specific array of N strings to be sorted.
      */
     public static void msdSort(String[] strs) {
         int N = strs.length;
