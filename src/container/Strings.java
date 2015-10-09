@@ -78,4 +78,50 @@ public class Strings {
     private static int charAt(String s, int d) {
         return d < s.length() ? (int)s.charAt(d) : -1;
     }
+
+
+    /**
+     * Pattern search using KMP algorithm.
+     * @param pat The needle to be searched.
+     * @param s The haystack to be be searched in.
+     * @return The begin index of the pattern first found. If not found, return -1.
+     */
+    public static int kmpPatternSearch(String s, String pat) {
+        int[] pmt = computePmt(pat);
+        for (int i = 0, j = 0, N = s.length(), M = pat.length(); i < N; ) {
+            if (s.charAt(i) == pat.charAt(j)) { // if matched
+                i++;
+                j++;
+                if (j == M) { // found
+                    return i - M;
+                }
+            } else {    // if not matched
+                if (j == 0) {
+                    i++;
+                } else {
+                    j = pmt[j-1];
+                }
+            }
+        }
+        return -1;
+    }
+    private static int[] computePmt(String pat) {
+        int M = pat.length();
+        int[] pmt = new int[M];
+        pmt[0] = 0;
+        for (int i = 1, len = 0; i < M; ) {
+            if (pmt[i] == pmt[len]) { // if suffix is also prefix
+                pmt[i] = ++len;
+                i++;
+            } else {              // if suffix is not prefix
+                if (len == 0) {
+                    pmt[i] = 0;
+                    i++;
+                } else {
+                    len = pmt[len-1];
+                }
+            }
+        }
+        return pmt;
+    }
 }
