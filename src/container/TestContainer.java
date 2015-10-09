@@ -211,5 +211,22 @@ class TestTable {
         System.out.println("Size: " + trie.size());
         System.out.println("Contains shells: " + trie.contains("shells"));
         System.out.println("Contains shell: " + trie.contains("shell"));
+        System.out.println("The trie is now: ");
+        for (String s : trie.keys()) {
+            System.out.println("--" + s + ": " + trie.get(s));
+        }
+        System.out.print("All strings with prefix sea is");
+        for (String s : trie.keysWithPrefix("sea")) {
+            System.out.print(" " + s);
+        }
+        System.out.println(".");
+    }
+}
+
+class TestString {
+    public static void main(String[] args) {
+        String s = "ABABDABACDABABCABAB";
+        String pat = "ABABCABAB";
+        System.out.println("Search " + s + " for " + pat + ": " + Strings.kmpPatternSearch(s, pat));
     }
 }

@@ -74,6 +74,7 @@ public class Trie<V> implements Table<String, V>{
      * @param key The specific key to be removed.
      * @return The value to which the specific value is mapped, null if key not found.
      */
+    @SuppressWarnings("unchecked")
     public V remove(String key) {
         if (root == null) return null;
         Stack<Node> stack = new ArrayStack<>();
@@ -100,6 +101,51 @@ public class Trie<V> implements Table<String, V>{
             }
         }
         return val;
+    }
+
+    /**
+     * Put all strings(subtries) with this prefix from this node into the queue.
+     */
+    private void collect(Node n, String pre, Queue<String> q) {
+        if (n == null) return;
+        if (n.value != null) q.offer(pre);
+        for (char c = 0; c < R; c++) {
+            collect(n.next[c], pre + c, q);
+        }
+    }
+
+
+    /**
+     * Return all the keys in the table(trie).
+     * @return An iterator of all the keys in the trie.
+     */
+    public Iterable<String> keys() {
+        Queue<String> q = new ArrayQueue<>();
+        collect(root, "", q);
+        return q;
+    }
+
+
+    /**
+     * Return all the keys with the specific prefix in the trie.
+     * @param pre The prefix all the returned keys having as.
+     * @return All the keys having prefix pre.
+     */
+    public Iterable<String> keysWithPrefix(String pre) {
+        Queue<String> q = new ArrayQueue<>();
+        collect(get(root, pre, 0), pre, q);
+        return q;
+    }
+
+
+    /**
+     * Return all the keys with wildcard pattern in the trie
+     * NOT IMPLEMENTED YET!!!!!!!!!!!!!!!!!!!
+     * @param pat The pattern.
+     * @return All keys with pattern pat.
+     */
+    public Iterable<String> keysWithPattern(String pat) {
+        return new ArrayQueue<>();
     }
 
 
