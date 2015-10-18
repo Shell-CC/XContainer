@@ -70,7 +70,6 @@ public class Trie<V> implements Table<String, V>{
 
     /**
      * Remove the key-value pair for a specific key from the table.
-     * Not implemented yet!!!!!!!!!!!!!!!!!!!!!!!!!!!
      * @param key The specific key to be removed.
      * @return The value to which the specific value is mapped, null if key not found.
      */

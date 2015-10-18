@@ -230,3 +230,32 @@ class TestString {
         System.out.println("Search " + s + " for " + pat + ": " + Strings.kmpPatternSearch(s, pat));
     }
 }
+
+class TestTST {
+    public static void main(String[] args) {
+        String[] strs = new String[]{"she", "shell", "seashells", "by", "the", "sea", "shells", "are", "sure", "seashell"};
+        TernarySearchTree<Integer> trie = new TernarySearchTree<>();
+        for (int i = 0, N = strs.length; i < N; i++) {
+            trie.put(strs[i], i);
+        }
+        System.out.println("Size: " + trie.size());
+        System.out.println("Get she: " + trie.get("she"));
+        System.out.println("Get shells: " + trie.get("shells"));
+        System.out.println("Get shel: " + trie.get("shel"));
+        //System.out.println("Contains shell: " + trie.contains("shell"));
+        // System.out.println("Remove shell.");
+        // trie.remove("shell");
+        // System.out.println("Size: " + trie.size());
+        // System.out.println("Contains shells: " + trie.contains("shells"));
+        // System.out.println("Contains shell: " + trie.contains("shell"));
+        // System.out.println("The trie is now: ");
+        // for (String s : trie.keys()) {
+            // System.out.println("--" + s + ": " + trie.get(s));
+        // }
+        // System.out.print("All strings with prefix sea is");
+        // for (String s : trie.keysWithPrefix("sea")) {
+            // System.out.print(" " + s);
+        // }
+        // System.out.println(".");
+    }
+}
