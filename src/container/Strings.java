@@ -124,4 +124,51 @@ public class Strings {
         }
         return pmt;
     }
+
+
+    /**
+     * Find the longest common substring of the given two string.
+     * @param s One of the string
+     * @param t The other string
+     * @return The longest common substring of the given two string.
+     */
+    public static String longestCommonSubstring(String s, String t) {
+        // Define C[i][j] to be the length of LCS of s[0: i-1] and t[0: j-1]
+        int M = s.length(); int N = t.length();
+        int[][] c = new int[M+1][N+1];
+        for (int i = 0; i <= M; i++) {
+            for (int j = 0; j <= N; j++) {
+                if (i == 0 || j == 0) {
+                    c[i][j] = 0;
+                } else if (s.charAt(i-1) == t.charAt(j-1)) {
+                    c[i][j] = c[i-1][j-1] + 1;
+                } else {
+                    c[i][j] = Math.max(c[i-1][j], c[i][j-1]);
+                }
+            }
+        }
+        /* Print the array
+          System.out.println("  " + t);
+        for (int i = 0; i <= M; i++) {
+            if (i == 0) System.out.print(" ");
+            else System.out.print(s.charAt(i-1));
+            for (int j = 0; j <= N; j++) {
+                System.out.print(c[i][j]);
+            }
+            System.out.println();
+            }*/
+        int len = c[M][N];
+        char[] lcs = new char[len];
+        for (int i = M, j = N; i > 0 && j > 0; ) {
+            if (s.charAt(i-1) == t.charAt(j-1)) {
+                lcs[--len] = s.charAt(i-1);
+                i--; j--;
+            } else if (c[i][j-1] > c[i-1][j]) {
+                j--;
+            } else {
+                i--;
+            }
+        }
+        return new String(lcs);
+    }
 }

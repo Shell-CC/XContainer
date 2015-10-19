@@ -226,8 +226,12 @@ class TestTable {
 class TestString {
     public static void main(String[] args) {
         String s = "ABABDABACDABABCABAB";
+        String t = "ACABCBBAC";
         String pat = "ABABCABAB";
-        System.out.println("Search " + s + " for " + pat + ": " + Strings.kmpPatternSearch(s, pat));
+        System.out.println("Search " + s + " for " + pat + ": "
+                           + Strings.kmpPatternSearch(s, pat));
+        System.out.println("The LCS between " + s +" and "
+                           + t + " is: " + Strings.longestCommonSubstring(s, t));
     }
 }
 
