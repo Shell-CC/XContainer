@@ -57,6 +57,15 @@ class TestSort {
     }
 }
 
+class TestArray {
+    public static void main(String[] args) {
+        Integer[] a = {10, 22, 9, 33, 21, 50, 41, 60, 80, 49};
+        System.out.print("Longest Increasing subarray in " + Arrays.toString(a));
+        Comparable[] suba = Arrays.longestIncreasingSubarray(a);
+        System.out.println(" is: " + Arrays.toString(suba));
+    }
+}
+
 
 class TestBinaryTree {
     public static void main(String[] args) {
