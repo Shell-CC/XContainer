@@ -161,7 +161,46 @@ public class Arrays {
      */
     public static Comparable[] longestIncreasingSubarray(Comparable[] a) {
         int N = a.length;
-        int lis[] = new int[N];  // lis ending with a[i]
+        int[] lis = new int[N];  // lis ending with a[i]
+        int[] lastIndex = new int[N];
+        for (int i = 0; i < N; i++) {
+            lastIndex[i] = -1;
+        }
+        lis[0] = 1;
+        for (int i = 1; i < N; i++) {
+            lis[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (a[i].compareTo(a[j]) > 0 && lis[j] + 1 > lis[i]) {
+                    lis[i] = lis[j] + 1;
+                    lastIndex[i] = j;
+                }
+            }
+        }
+        int max = 0; int maxIndex = 0;
+        for (int i = 0; i < N; i++) {
+            if (lis[i] > max) {
+                max = lis[i];
+                maxIndex = i;
+            }
+        }
+        Comparable[] res = new Comparable[max];
+        for (int i = maxIndex; i > 0; ) {
+            res[--max] = a[i];
+            i = lastIndex[i];
+        }
+        return res;
+    }
+
+
+    /**
+     * Find the longest bitonic subarray.
+     * @param a The given array
+     * @return The number of longest bitonic subarray.
+     */
+    public static int longestBitonicSubarray(Comparable[] a) {
+        int N = a.length;
+        int[] lis = new int[N]; // longest increasing subarray ending with a[i]
+        int[] lds = new int[N]; // longest decreasing subarray begining with a[i]
         lis[0] = 1;
         for (int i = 1; i < N; i++) {
             lis[i] = 1;
@@ -171,16 +210,21 @@ public class Arrays {
                 }
             }
         }
-        int max = 1;
-        for (int i = 0; i < N; i++) {
-            max = Math.max(max, lis[i]);
-        }
-        Comparable[] res = new Comparable[max];
-        for (int i = N-1; i >=0; i--) {
-            if (lis[i] == max) {
-                res[--max] = a[i];
+        lds[N-1] = 1;
+        for (int i = N-2; i >= 0; i--) {
+            lds[i] = 1;
+            for (int j = N-1; j > i; j--) {
+                if (a[i].compareTo(a[j]) > 0) {
+                    lds[i] = Math.max(lds[i], lds[j] + 1);
+                }
             }
         }
-        return res;
+        int len = 0;
+        for (int i = 0; i < N; i++) {
+            if (lis[i] + lds[i] - 1 > len) {
+                len = lis[i] + lds[i] - 1;
+            }
+        }
+        return len;
     }
 }

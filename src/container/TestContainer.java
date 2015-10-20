@@ -59,10 +59,13 @@ class TestSort {
 
 class TestArray {
     public static void main(String[] args) {
-        Integer[] a = {10, 22, 9, 33, 21, 50, 41, 60, 80, 49};
+        Integer[] a = {10, 8, 9, 33, 21, 50, 41, 60, 80, 49};
         System.out.print("Longest Increasing subarray in " + Arrays.toString(a));
         Comparable[] suba = Arrays.longestIncreasingSubarray(a);
         System.out.println(" is: " + Arrays.toString(suba));
+        Integer[] b = {0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15};
+        System.out.println("The length of longest bitonic subarray is "
+                           + Arrays.longestBitonicSubarray(b));
     }
 }
 
