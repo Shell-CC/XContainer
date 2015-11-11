@@ -171,4 +171,34 @@ public class Strings {
         }
         return new String(lcs);
     }
+
+
+    /**
+     * Count all palindrome substring with duplicates.
+     * @param The given string.
+     * @return Nunmber of substrings.
+     */
+    public static int countPalindromeSubstring(String s) {
+        assert s != null;
+        int N = s.length();
+        int count = 0;
+        for (int d = 0; d <= 1; d++) {
+            // when d = 0, search all odd-length palindroid substring centered at i
+            // when d = 1, search all even-length palindroid substring
+            for (int i = 0; i < N - d; i++) {
+                int left = i;
+                int right = i + d;
+                while (left >= 0 && right < N) {
+                    if (s.charAt(left) != s.charAt(right)) {
+                        break;
+                    }
+                    count++;
+                    System.out.println(s.substring(left, right+1));
+                    left--;
+                    right++;
+                }
+            }
+        }
+        return count;
+    }
 }
